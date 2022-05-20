@@ -1,0 +1,48 @@
+<template>
+  <swiper class="Swiper">
+    <swiper-item v-for="item in banners"
+                 :key="item.value">
+      <a :href="item.link">
+        <img :src="item.image"
+             alt=""
+             @load="Swiperimgload">
+      </a>
+    </swiper-item>
+  </swiper>
+</template>
+
+<script>
+//导入Swiper 对象  
+import { Swiper, SwiperItem } from '@/components/common/swiper/index'
+export default {
+  name: 'ChileComps',
+  components: {
+    Swiper, SwiperItem
+  },
+  props: {
+    banners: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
+  data () {
+    return {
+      isLoad: false
+    };
+  },
+  methods: {
+    Swiperimgload () {
+      if (!this.isLoad) {
+        this.$emit("SwiperimgLoad")
+        this.isLoad = true
+      }
+    }
+
+  },
+}
+</script>
+
+<style scoped>
+</style>
